@@ -1,0 +1,15 @@
+# Environment / secrets
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# ChromaDB (generated vector store — rebuild from Udaplay_01)
+chromadb/
+
+# macOS / IDE
+.DS_Store
+.idea/
