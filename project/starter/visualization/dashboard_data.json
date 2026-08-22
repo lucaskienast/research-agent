@@ -1,0 +1,894 @@
+{
+  "count": 15,
+  "embedding_dim": 1536,
+  "pca_explained": [
+    0.1639,
+    0.1261
+  ],
+  "games": [
+    {
+      "id": "001",
+      "Name": "Gran Turismo",
+      "Platform": "PlayStation 1",
+      "Genre": "Racing",
+      "Publisher": "Sony Computer Entertainment",
+      "YearOfRelease": 1997,
+      "Description": "A realistic racing simulator featuring a wide array of cars and tracks, setting a new standard for the genre.",
+      "x": -0.1494,
+      "y": 0.3323
+    },
+    {
+      "id": "002",
+      "Name": "Grand Theft Auto: San Andreas",
+      "Platform": "PlayStation 2",
+      "Genre": "Action-adventure",
+      "Publisher": "Rockstar Games",
+      "YearOfRelease": 2004,
+      "Description": "An expansive open-world game set in the fictional state of San Andreas, following the story of Carl 'CJ' Johnson.",
+      "x": -0.1289,
+      "y": 0.1322
+    },
+    {
+      "id": "003",
+      "Name": "Gran Turismo 5",
+      "Platform": "PlayStation 3",
+      "Genre": "Racing",
+      "Publisher": "Sony Computer Entertainment",
+      "YearOfRelease": 2010,
+      "Description": "A comprehensive racing simulator featuring a vast selection of vehicles and tracks, with realistic driving physics.",
+      "x": -0.2051,
+      "y": 0.2919
+    },
+    {
+      "id": "004",
+      "Name": "Marvel's Spider-Man",
+      "Platform": "PlayStation 4",
+      "Genre": "Action-adventure",
+      "Publisher": "Sony Interactive Entertainment",
+      "YearOfRelease": 2018,
+      "Description": "An open-world superhero game that lets players swing through New York City as Spider-Man, battling iconic villains.",
+      "x": -0.1604,
+      "y": -0.1382
+    },
+    {
+      "id": "005",
+      "Name": "Marvel's Spider-Man 2",
+      "Platform": "PlayStation 5",
+      "Genre": "Action-adventure",
+      "Publisher": "Sony Interactive Entertainment",
+      "YearOfRelease": 2023,
+      "Description": "The sequel to the acclaimed Spider-Man game, featuring both Peter Parker and Miles Morales as playable characters.",
+      "x": -0.1662,
+      "y": -0.1533
+    },
+    {
+      "id": "006",
+      "Name": "Pok\u00e9mon Gold and Silver",
+      "Platform": "Game Boy Color",
+      "Genre": "Role-playing",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 1999,
+      "Description": "Second-generation Pok\u00e9mon games introducing new regions, Pok\u00e9mon, and gameplay mechanics.",
+      "x": 0.3027,
+      "y": 0.0113
+    },
+    {
+      "id": "007",
+      "Name": "Pok\u00e9mon Ruby and Sapphire",
+      "Platform": "Game Boy Advance",
+      "Genre": "Role-playing",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 2002,
+      "Description": "Third-generation Pok\u00e9mon games set in the Hoenn region, featuring new Pok\u00e9mon and double battles.",
+      "x": 0.3196,
+      "y": 0.026
+    },
+    {
+      "id": "008",
+      "Name": "Super Mario World",
+      "Platform": "Super Nintendo Entertainment System (SNES)",
+      "Genre": "Platformer",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 1990,
+      "Description": "A classic platformer where Mario embarks on a quest to save Princess Toadstool and Dinosaur Land from Bowser.",
+      "x": 0.183,
+      "y": -0.0273
+    },
+    {
+      "id": "009",
+      "Name": "Super Mario 64",
+      "Platform": "Nintendo 64",
+      "Genre": "Platformer",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 1996,
+      "Description": "A groundbreaking 3D platformer that set new standards for the genre, featuring Mario's quest to rescue Princess Peach.",
+      "x": 0.1815,
+      "y": 0.0177
+    },
+    {
+      "id": "010",
+      "Name": "Super Smash Bros. Melee",
+      "Platform": "GameCube",
+      "Genre": "Fighting",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 2001,
+      "Description": "A crossover fighting game featuring characters from various Nintendo franchises battling it out in dynamic arenas.",
+      "x": 0.1015,
+      "y": -0.0263
+    },
+    {
+      "id": "011",
+      "Name": "Wii Sports",
+      "Platform": "Wii",
+      "Genre": "Sports",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 2006,
+      "Description": "A collection of sports games that utilize the Wii's motion controls, bundled with the console to showcase its capabilities.",
+      "x": 0.0568,
+      "y": 0.0188
+    },
+    {
+      "id": "012",
+      "Name": "Mario Kart 8 Deluxe",
+      "Platform": "Nintendo Switch",
+      "Genre": "Racing",
+      "Publisher": "Nintendo",
+      "YearOfRelease": 2017,
+      "Description": "An enhanced version of Mario Kart 8, featuring new characters, tracks, and improved gameplay mechanics.",
+      "x": 0.0303,
+      "y": 0.0387
+    },
+    {
+      "id": "013",
+      "Name": "Kinect Adventures!",
+      "Platform": "Xbox 360",
+      "Genre": "Party",
+      "Publisher": "Microsoft Game Studios",
+      "YearOfRelease": 2010,
+      "Description": "A collection of mini-games designed to showcase the capabilities of the Kinect motion sensor.",
+      "x": -0.0511,
+      "y": -0.1272
+    },
+    {
+      "id": "014",
+      "Name": "Minecraft",
+      "Platform": "Xbox One",
+      "Genre": "Sandbox, Survival",
+      "Publisher": "Mojang Studios",
+      "YearOfRelease": 2014,
+      "Description": "A sandbox game that allows players to build and explore infinite worlds, fostering creativity and adventure.",
+      "x": -0.1366,
+      "y": -0.1837
+    },
+    {
+      "id": "015",
+      "Name": "Halo Infinite",
+      "Platform": "Xbox Series X|S",
+      "Genre": "First-person shooter",
+      "Publisher": "Xbox Game Studios",
+      "YearOfRelease": 2021,
+      "Description": "The latest installment in the Halo franchise, featuring Master Chief's return in a new open-world setting.",
+      "x": -0.1776,
+      "y": -0.2129
+    }
+  ],
+  "by_platform": {
+    "Game Boy Advance": 1,
+    "Game Boy Color": 1,
+    "GameCube": 1,
+    "Nintendo 64": 1,
+    "Nintendo Switch": 1,
+    "PlayStation 1": 1,
+    "PlayStation 2": 1,
+    "PlayStation 3": 1,
+    "PlayStation 4": 1,
+    "PlayStation 5": 1,
+    "Super Nintendo Entertainment System (SNES)": 1,
+    "Wii": 1,
+    "Xbox 360": 1,
+    "Xbox One": 1,
+    "Xbox Series X|S": 1
+  },
+  "by_genre": {
+    "Action-adventure": 3,
+    "Racing": 3,
+    "Platformer": 2,
+    "Role-playing": 2,
+    "Fighting": 1,
+    "First-person shooter": 1,
+    "Party": 1,
+    "Sandbox, Survival": 1,
+    "Sports": 1
+  },
+  "by_publisher": {
+    "Nintendo": 7,
+    "Sony Computer Entertainment": 2,
+    "Sony Interactive Entertainment": 2,
+    "Microsoft Game Studios": 1,
+    "Mojang Studios": 1,
+    "Rockstar Games": 1,
+    "Xbox Game Studios": 1
+  },
+  "by_year": {
+    "2010": 2,
+    "1990": 1,
+    "1996": 1,
+    "1997": 1,
+    "1999": 1,
+    "2001": 1,
+    "2002": 1,
+    "2004": 1,
+    "2006": 1,
+    "2014": 1,
+    "2017": 1,
+    "2018": 1,
+    "2021": 1,
+    "2023": 1
+  },
+  "similarity_matrix": [
+    [
+      1.0,
+      0.8446,
+      0.9403,
+      0.7977,
+      0.7844,
+      0.7858,
+      0.7717,
+      0.7886,
+      0.8147,
+      0.7925,
+      0.7969,
+      0.8161,
+      0.7675,
+      0.7881,
+      0.7815
+    ],
+    [
+      0.8446,
+      1.0,
+      0.8388,
+      0.8241,
+      0.7823,
+      0.7791,
+      0.7687,
+      0.7992,
+      0.8018,
+      0.783,
+      0.7687,
+      0.7692,
+      0.7663,
+      0.8101,
+      0.7833
+    ],
+    [
+      0.9403,
+      0.8388,
+      1.0,
+      0.817,
+      0.8039,
+      0.7691,
+      0.7634,
+      0.7716,
+      0.7952,
+      0.7904,
+      0.8115,
+      0.8326,
+      0.7945,
+      0.7953,
+      0.7882
+    ],
+    [
+      0.7977,
+      0.8241,
+      0.817,
+      1.0,
+      0.896,
+      0.775,
+      0.7628,
+      0.8107,
+      0.8132,
+      0.8094,
+      0.784,
+      0.8104,
+      0.7776,
+      0.8293,
+      0.8072
+    ],
+    [
+      0.7844,
+      0.7823,
+      0.8039,
+      0.896,
+      1.0,
+      0.78,
+      0.7528,
+      0.7724,
+      0.7775,
+      0.7862,
+      0.7676,
+      0.7847,
+      0.7628,
+      0.781,
+      0.8085
+    ],
+    [
+      0.7858,
+      0.7791,
+      0.7691,
+      0.775,
+      0.78,
+      1.0,
+      0.9258,
+      0.8194,
+      0.8312,
+      0.8056,
+      0.7905,
+      0.7972,
+      0.7681,
+      0.7701,
+      0.7627
+    ],
+    [
+      0.7717,
+      0.7687,
+      0.7634,
+      0.7628,
+      0.7528,
+      0.9258,
+      1.0,
+      0.799,
+      0.8186,
+      0.7875,
+      0.7781,
+      0.787,
+      0.7638,
+      0.7502,
+      0.7549
+    ],
+    [
+      0.7886,
+      0.7992,
+      0.7716,
+      0.8107,
+      0.7724,
+      0.8194,
+      0.799,
+      1.0,
+      0.9129,
+      0.833,
+      0.8047,
+      0.8182,
+      0.7694,
+      0.8039,
+      0.76
+    ],
+    [
+      0.8147,
+      0.8018,
+      0.7952,
+      0.8132,
+      0.7775,
+      0.8312,
+      0.8186,
+      0.9129,
+      1.0,
+      0.8453,
+      0.8186,
+      0.845,
+      0.78,
+      0.8088,
+      0.7697
+    ],
+    [
+      0.7925,
+      0.783,
+      0.7904,
+      0.8094,
+      0.7862,
+      0.8056,
+      0.7875,
+      0.833,
+      0.8453,
+      1.0,
+      0.828,
+      0.8268,
+      0.7789,
+      0.7878,
+      0.7758
+    ],
+    [
+      0.7969,
+      0.7687,
+      0.8115,
+      0.784,
+      0.7676,
+      0.7905,
+      0.7781,
+      0.8047,
+      0.8186,
+      0.828,
+      1.0,
+      0.8193,
+      0.8487,
+      0.7807,
+      0.7562
+    ],
+    [
+      0.8161,
+      0.7692,
+      0.8326,
+      0.8104,
+      0.7847,
+      0.7972,
+      0.787,
+      0.8182,
+      0.845,
+      0.8268,
+      0.8193,
+      1.0,
+      0.8019,
+      0.7948,
+      0.7876
+    ],
+    [
+      0.7675,
+      0.7663,
+      0.7945,
+      0.7776,
+      0.7628,
+      0.7681,
+      0.7638,
+      0.7694,
+      0.78,
+      0.7789,
+      0.8487,
+      0.8019,
+      1.0,
+      0.8219,
+      0.7989
+    ],
+    [
+      0.7881,
+      0.8101,
+      0.7953,
+      0.8293,
+      0.781,
+      0.7701,
+      0.7502,
+      0.8039,
+      0.8088,
+      0.7878,
+      0.7807,
+      0.7948,
+      0.8219,
+      1.0,
+      0.8477
+    ],
+    [
+      0.7815,
+      0.7833,
+      0.7882,
+      0.8072,
+      0.8085,
+      0.7627,
+      0.7549,
+      0.76,
+      0.7697,
+      0.7758,
+      0.7562,
+      0.7876,
+      0.7989,
+      0.8477,
+      1.0
+    ]
+  ],
+  "neighbors": {
+    "001": [
+      {
+        "id": "003",
+        "name": "Gran Turismo 5",
+        "platform": "PlayStation 3",
+        "similarity": 0.9403
+      },
+      {
+        "id": "002",
+        "name": "Grand Theft Auto: San Andreas",
+        "platform": "PlayStation 2",
+        "similarity": 0.8446
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.8161
+      },
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.8147
+      }
+    ],
+    "002": [
+      {
+        "id": "001",
+        "name": "Gran Turismo",
+        "platform": "PlayStation 1",
+        "similarity": 0.8446
+      },
+      {
+        "id": "003",
+        "name": "Gran Turismo 5",
+        "platform": "PlayStation 3",
+        "similarity": 0.8388
+      },
+      {
+        "id": "004",
+        "name": "Marvel's Spider-Man",
+        "platform": "PlayStation 4",
+        "similarity": 0.8241
+      },
+      {
+        "id": "014",
+        "name": "Minecraft",
+        "platform": "Xbox One",
+        "similarity": 0.8101
+      }
+    ],
+    "003": [
+      {
+        "id": "001",
+        "name": "Gran Turismo",
+        "platform": "PlayStation 1",
+        "similarity": 0.9403
+      },
+      {
+        "id": "002",
+        "name": "Grand Theft Auto: San Andreas",
+        "platform": "PlayStation 2",
+        "similarity": 0.8388
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.8326
+      },
+      {
+        "id": "004",
+        "name": "Marvel's Spider-Man",
+        "platform": "PlayStation 4",
+        "similarity": 0.817
+      }
+    ],
+    "004": [
+      {
+        "id": "005",
+        "name": "Marvel's Spider-Man 2",
+        "platform": "PlayStation 5",
+        "similarity": 0.896
+      },
+      {
+        "id": "014",
+        "name": "Minecraft",
+        "platform": "Xbox One",
+        "similarity": 0.8293
+      },
+      {
+        "id": "002",
+        "name": "Grand Theft Auto: San Andreas",
+        "platform": "PlayStation 2",
+        "similarity": 0.8241
+      },
+      {
+        "id": "003",
+        "name": "Gran Turismo 5",
+        "platform": "PlayStation 3",
+        "similarity": 0.817
+      }
+    ],
+    "005": [
+      {
+        "id": "004",
+        "name": "Marvel's Spider-Man",
+        "platform": "PlayStation 4",
+        "similarity": 0.896
+      },
+      {
+        "id": "015",
+        "name": "Halo Infinite",
+        "platform": "Xbox Series X|S",
+        "similarity": 0.8085
+      },
+      {
+        "id": "003",
+        "name": "Gran Turismo 5",
+        "platform": "PlayStation 3",
+        "similarity": 0.8039
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.7862
+      }
+    ],
+    "006": [
+      {
+        "id": "007",
+        "name": "Pok\u00e9mon Ruby and Sapphire",
+        "platform": "Game Boy Advance",
+        "similarity": 0.9258
+      },
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.8312
+      },
+      {
+        "id": "008",
+        "name": "Super Mario World",
+        "platform": "Super Nintendo Entertainment System (SNES)",
+        "similarity": 0.8194
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.8056
+      }
+    ],
+    "007": [
+      {
+        "id": "006",
+        "name": "Pok\u00e9mon Gold and Silver",
+        "platform": "Game Boy Color",
+        "similarity": 0.9258
+      },
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.8186
+      },
+      {
+        "id": "008",
+        "name": "Super Mario World",
+        "platform": "Super Nintendo Entertainment System (SNES)",
+        "similarity": 0.799
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.7875
+      }
+    ],
+    "008": [
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.9129
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.833
+      },
+      {
+        "id": "006",
+        "name": "Pok\u00e9mon Gold and Silver",
+        "platform": "Game Boy Color",
+        "similarity": 0.8194
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.8182
+      }
+    ],
+    "009": [
+      {
+        "id": "008",
+        "name": "Super Mario World",
+        "platform": "Super Nintendo Entertainment System (SNES)",
+        "similarity": 0.9129
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.8453
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.845
+      },
+      {
+        "id": "006",
+        "name": "Pok\u00e9mon Gold and Silver",
+        "platform": "Game Boy Color",
+        "similarity": 0.8312
+      }
+    ],
+    "010": [
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.8453
+      },
+      {
+        "id": "008",
+        "name": "Super Mario World",
+        "platform": "Super Nintendo Entertainment System (SNES)",
+        "similarity": 0.833
+      },
+      {
+        "id": "011",
+        "name": "Wii Sports",
+        "platform": "Wii",
+        "similarity": 0.828
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.8268
+      }
+    ],
+    "011": [
+      {
+        "id": "013",
+        "name": "Kinect Adventures!",
+        "platform": "Xbox 360",
+        "similarity": 0.8487
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.828
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.8193
+      },
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.8186
+      }
+    ],
+    "012": [
+      {
+        "id": "009",
+        "name": "Super Mario 64",
+        "platform": "Nintendo 64",
+        "similarity": 0.845
+      },
+      {
+        "id": "003",
+        "name": "Gran Turismo 5",
+        "platform": "PlayStation 3",
+        "similarity": 0.8326
+      },
+      {
+        "id": "010",
+        "name": "Super Smash Bros. Melee",
+        "platform": "GameCube",
+        "similarity": 0.8268
+      },
+      {
+        "id": "011",
+        "name": "Wii Sports",
+        "platform": "Wii",
+        "similarity": 0.8193
+      }
+    ],
+    "013": [
+      {
+        "id": "011",
+        "name": "Wii Sports",
+        "platform": "Wii",
+        "similarity": 0.8487
+      },
+      {
+        "id": "014",
+        "name": "Minecraft",
+        "platform": "Xbox One",
+        "similarity": 0.8219
+      },
+      {
+        "id": "012",
+        "name": "Mario Kart 8 Deluxe",
+        "platform": "Nintendo Switch",
+        "similarity": 0.8019
+      },
+      {
+        "id": "015",
+        "name": "Halo Infinite",
+        "platform": "Xbox Series X|S",
+        "similarity": 0.7989
+      }
+    ],
+    "014": [
+      {
+        "id": "015",
+        "name": "Halo Infinite",
+        "platform": "Xbox Series X|S",
+        "similarity": 0.8477
+      },
+      {
+        "id": "004",
+        "name": "Marvel's Spider-Man",
+        "platform": "PlayStation 4",
+        "similarity": 0.8293
+      },
+      {
+        "id": "013",
+        "name": "Kinect Adventures!",
+        "platform": "Xbox 360",
+        "similarity": 0.8219
+      },
+      {
+        "id": "002",
+        "name": "Grand Theft Auto: San Andreas",
+        "platform": "PlayStation 2",
+        "similarity": 0.8101
+      }
+    ],
+    "015": [
+      {
+        "id": "014",
+        "name": "Minecraft",
+        "platform": "Xbox One",
+        "similarity": 0.8477
+      },
+      {
+        "id": "005",
+        "name": "Marvel's Spider-Man 2",
+        "platform": "PlayStation 5",
+        "similarity": 0.8085
+      },
+      {
+        "id": "004",
+        "name": "Marvel's Spider-Man",
+        "platform": "PlayStation 4",
+        "similarity": 0.8072
+      },
+      {
+        "id": "013",
+        "name": "Kinect Adventures!",
+        "platform": "Xbox 360",
+        "similarity": 0.7989
+      }
+    ]
+  },
+  "labels": [
+    "Gran Turismo",
+    "Grand Theft Auto: San Andreas",
+    "Gran Turismo 5",
+    "Marvel's Spider-Man",
+    "Marvel's Spider-Man 2",
+    "Pok\u00e9mon Gold and Silver",
+    "Pok\u00e9mon Ruby and Sapphire",
+    "Super Mario World",
+    "Super Mario 64",
+    "Super Smash Bros. Melee",
+    "Wii Sports",
+    "Mario Kart 8 Deluxe",
+    "Kinect Adventures!",
+    "Minecraft",
+    "Halo Infinite"
+  ]
+}
