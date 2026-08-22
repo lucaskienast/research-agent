@@ -414,42 +414,38 @@ function renderKPIs(){
 
 /* ---------- pipeline diagram ---------- */
 function renderPipe(){
-  const W=880,H=210;
-  const box=(x,y,w,h,title,sub,stroke,fill)=>`
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="11"
-      fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>
-    <text x="${x+w/2}" y="${y+26}" text-anchor="middle" font-size="13.5" font-weight="600"
-      font-family="Chakra Petch" fill="var(--ink)">${title}</text>
-    <text x="${x+w/2}" y="${y+45}" text-anchor="middle" font-size="11" fill="var(--muted)"
-      font-family="IBM Plex Mono">${sub}</text>`;
-  const arrow=(x1,y1,x2,y2,color)=>`
-    <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2" marker-end="url(#ah)"/>`;
-  const acc="var(--accent)", card="var(--surface-2)", good="var(--good)", mut="var(--muted)";
+  const W=900,H=210;
+  const card="var(--surface-2)", acc="var(--accent)", good="var(--good)", mut="var(--muted)";
+  const y1=50, cy=y1+26;                     // row-1 vertical centre
+  const dcx=588, dhw=42, dhh=32, wy=148;     // diamond centre + web-row top
+  const box=(x,y,w,title,sub,stroke)=>`
+    <rect x="${x}" y="${y}" width="${w}" height="52" rx="11" fill="${card}" stroke="${stroke}" stroke-width="1.5"/>
+    <text x="${x+w/2}" y="${y+22}" text-anchor="middle" font-size="13.5" font-weight="600" font-family="Chakra Petch" fill="var(--ink)">${title}</text>
+    <text x="${x+w/2}" y="${y+39}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="IBM Plex Mono">${sub}</text>`;
+  const line=(x1,ya,x2,yb,color,mk)=>`<line x1="${x1}" y1="${ya}" x2="${x2}" y2="${yb}" stroke="${color}" stroke-width="2" marker-end="url(#${mk})"/>`;
   const svg=`
-  <svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Retrieval pipeline diagram">
-    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--axis)"/></marker>
+  <svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Retrieval pipeline diagram: user question, retrieve_game, evaluate_retrieval, useful decision to generate or web fallback">
+    <defs>
+      <marker id="ah"  viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--axis)"/></marker>
+      <marker id="ahg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--good)"/></marker>
+      <marker id="ahm" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
     </defs>
-    ${box(8,78,150,54,"User question","query","var(--border-2)",card)}
-    ${arrow(158,105,190,105,"var(--axis)")}
-    ${box(190,78,168,54,"retrieve_game","vector search &middot; k=5",acc,card)}
-    ${arrow(358,105,390,105,"var(--axis)")}
-    ${box(390,78,178,54,"evaluate_retrieval","LLM-as-judge",acc,card)}
-    <polygon points="600,105 636,80 672,105 636,130" fill="${card}" stroke="var(--border-2)" stroke-width="1.5"/>
-    <text x="636" y="102" text-anchor="middle" font-size="12" font-weight="600" font-family="Chakra Petch" fill="var(--ink)">useful?</text>
-    <text x="636" y="118" text-anchor="middle" font-size="10" font-family="IBM Plex Mono" fill="var(--muted)">judge</text>
-    ${arrow(568,105,600,105,"var(--axis)")}
-    <!-- yes -> generate -->
-    ${arrow(672,105,712,105,good)}
-    <text x="690" y="97" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--good-ink)" font-family="IBM Plex Mono">yes</text>
-    ${box(712,78,160,54,"generate","final answer",good,card)}
-    <!-- no -> web -->
-    ${arrow(636,130,636,168,mut)}
-    <text x="648" y="152" font-size="10.5" font-weight="600" fill="var(--muted)" font-family="IBM Plex Mono">no</text>
-    ${box(430,160,220,42,"game_web_search","Tavily web fallback",mut,card)}
-    ${arrow(430,181,300,181,mut)}
-    <path d="M300,181 C 260,181 792,181 792,140" fill="none" stroke="${mut}" stroke-width="2" stroke-dasharray="0" marker-end="url(#ah)" opacity="0"/>
-    ${arrow(650,175,760,140,mut)}
+    ${box(12, y1, 128, "User question", "query", "var(--border-2)")}
+    ${line(140, cy, 166, cy, "var(--axis)", "ah")}
+    ${box(166, y1, 158, "retrieve_game", "vector search &middot; k=5", acc)}
+    ${line(324, cy, 350, cy, "var(--axis)", "ah")}
+    ${box(350, y1, 172, "evaluate_retrieval", "LLM-as-judge", acc)}
+    ${line(522, cy, dcx-dhw, cy, "var(--axis)", "ah")}
+    <polygon points="${dcx-dhw},${cy} ${dcx},${cy-dhh} ${dcx+dhw},${cy} ${dcx},${cy+dhh}" fill="${card}" stroke="var(--border-2)" stroke-width="1.5"/>
+    <text x="${dcx}" y="${cy-2}" text-anchor="middle" font-size="12.5" font-weight="600" font-family="Chakra Petch" fill="var(--ink)">useful?</text>
+    <text x="${dcx}" y="${cy+13}" text-anchor="middle" font-size="10" font-family="IBM Plex Mono" fill="var(--muted)">judge</text>
+    ${line(dcx+dhw, cy, 706, cy, good, "ahg")}
+    <text x="${(dcx+dhw+706)/2}" y="${cy-8}" text-anchor="middle" font-size="11" font-weight="600" fill="var(--good-ink)" font-family="IBM Plex Mono">yes</text>
+    ${box(706, y1, 150, "generate", "final answer", good)}
+    ${line(dcx, cy+dhh, dcx, wy, mut, "ahm")}
+    <text x="${dcx+12}" y="${cy+dhh+18}" font-size="11" font-weight="600" fill="var(--muted)" font-family="IBM Plex Mono">no</text>
+    ${box(474, wy, 224, "game_web_search", "Tavily web fallback", mut)}
+    <polyline points="698,${wy+26} 770,${wy+26} 770,${y1+54}" fill="none" stroke="${mut}" stroke-width="2" marker-end="url(#ahm)"/>
   </svg>`;
   $("#pipe").innerHTML = svg;
 }
