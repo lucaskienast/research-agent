@@ -1,0 +1,735 @@
+<title>UdaPlay Retrieval Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+/* ============================ TOKENS ============================ */
+:root{
+  color-scheme: light;
+  --plane:      #e9edf3;
+  --surface:    #ffffff;
+  --surface-2:  #f4f6fa;
+  --ink:        #0e1116;
+  --ink-2:      #4b525e;
+  --muted:      #838a97;
+  --border:     rgba(14,17,22,0.10);
+  --border-2:   rgba(14,17,22,0.16);
+  --grid:       #e4e8ef;
+  --axis:       #c7ccd6;
+
+  --accent:     #2a78d6;
+  --accent-rgb: 42,120,214;
+  --accent-ink: #1c5cab;
+
+  --nintendo:   #2a78d6;   /* categorical slot 1 (blue)   */
+  --playstation:#eb6834;   /* categorical slot 2 (orange) */
+  --xbox:       #1baf7a;   /* categorical slot 3 (aqua)   */
+
+  --good:       #0ca30c;   /* status: fixed */
+  --good-ink:   #006300;
+
+  --shadow: 0 1px 2px rgba(14,17,22,.04), 0 8px 24px rgba(14,17,22,.06);
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --plane:      #090b0f;
+    --surface:    #14181f;
+    --surface-2:  #1a1f28;
+    --ink:        #f2f5fa;
+    --ink-2:      #b7bfcc;
+    --muted:      #7d8494;
+    --border:     rgba(255,255,255,0.10);
+    --border-2:   rgba(255,255,255,0.16);
+    --grid:       #242b35;
+    --axis:       #39414d;
+
+    --accent:     #3987e5;
+    --accent-rgb: 57,135,229;
+    --accent-ink: #8fbdf2;
+
+    --nintendo:   #3987e5;
+    --playstation:#d95926;
+    --xbox:       #199e70;
+
+    --good:       #0ca30c;
+    --good-ink:   #4fd24f;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:      #090b0f;
+  --surface:    #14181f;
+  --surface-2:  #1a1f28;
+  --ink:        #f2f5fa;
+  --ink-2:      #b7bfcc;
+  --muted:      #7d8494;
+  --border:     rgba(255,255,255,0.10);
+  --border-2:   rgba(255,255,255,0.16);
+  --grid:       #242b35;
+  --axis:       #39414d;
+  --accent:     #3987e5;
+  --accent-rgb: 57,135,229;
+  --accent-ink: #8fbdf2;
+  --nintendo:   #3987e5;
+  --playstation:#d95926;
+  --xbox:       #199e70;
+  --good:       #0ca30c;
+  --good-ink:   #4fd24f;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.5);
+}
+
+/* ============================ BASE ============================ */
+*{ box-sizing: border-box; }
+body{
+  margin: 0;
+  background: var(--plane);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap{ max-width: 1120px; margin: 0 auto; padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 40px) 72px; }
+
+h1,h2,h3{ font-family: "Chakra Petch", system-ui, sans-serif; margin: 0; text-wrap: balance; letter-spacing: .01em; }
+.mono{ font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.eyebrow{
+  font-family: "Chakra Petch", sans-serif; font-weight: 600;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-ink);
+}
+a{ color: var(--accent-ink); }
+
+/* ============================ HEADER ============================ */
+.head{ display:flex; justify-content:space-between; align-items:flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+.head h1{ font-size: clamp(30px, 5vw, 46px); font-weight: 700; line-height: 1.02; margin: 8px 0 10px; }
+.head p{ margin: 0; color: var(--ink-2); max-width: 62ch; font-size: 15.5px; }
+.themebtn{
+  font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.05em;
+  background: var(--surface); color: var(--ink-2); border:1px solid var(--border-2);
+  border-radius: 999px; padding: 8px 14px; cursor:pointer; white-space:nowrap;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.themebtn:hover{ border-color: var(--accent); color: var(--ink); }
+
+/* ============================ SECTION / CARD ============================ */
+section{ margin-top: 30px; }
+.sec-head{ margin-bottom: 14px; }
+.sec-head h2{ font-size: 20px; font-weight: 600; }
+.sec-head .sub{ color: var(--muted); font-size: 13.5px; margin-top: 3px; }
+.card{
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: clamp(16px, 3vw, 24px);
+}
+
+/* ============================ KPI TILES ============================ */
+.kpis{ display:grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+@media (max-width: 860px){ .kpis{ grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 480px){ .kpis{ grid-template-columns: repeat(2,1fr); } }
+.kpi{ background: var(--surface); border:1px solid var(--border); border-radius: 12px; padding: 14px 15px; }
+.kpi .v{ font-size: 27px; font-weight: 600; letter-spacing: -.01em; }
+.kpi .v small{ font-size: 14px; color: var(--muted); font-weight:500; }
+.kpi .l{ font-family:"Chakra Petch",sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing:.13em; color: var(--muted); margin-top: 2px; }
+
+/* ============================ PIPELINE ============================ */
+.pipe-wrap{ overflow-x:auto; }
+.pipe-legend{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:12.5px; color:var(--ink-2); }
+.pipe-legend span{ display:inline-flex; align-items:center; gap:7px; }
+.dotk{ width:11px; height:11px; border-radius:3px; display:inline-block; }
+
+/* ============================ VECTOR SEARCH DEMO ============================ */
+.demo{ display:grid; grid-template-columns: 260px 1fr; gap: 20px; }
+@media (max-width: 760px){ .demo{ grid-template-columns: 1fr; } }
+.picker{ border:1px solid var(--border); border-radius:12px; overflow:hidden; max-height: 430px; overflow-y:auto; background:var(--surface-2); }
+.picker button{
+  display:flex; width:100%; text-align:left; gap:10px; align-items:center;
+  background:transparent; border:0; border-bottom:1px solid var(--border);
+  padding:9px 12px; cursor:pointer; color:var(--ink); font-family:inherit; font-size:13px;
+}
+.picker button:last-child{ border-bottom:0; }
+.picker button:hover{ background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.picker button[aria-selected="true"]{ background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.picker .pid{ font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); }
+.result h3{ font-size: 17px; font-weight:600; }
+.query-card{ border:1px solid var(--border-2); border-left: 3px solid var(--accent); border-radius:10px; padding:13px 15px; background:var(--surface-2); margin-bottom:16px; }
+.query-card .desc{ color:var(--ink-2); font-size:13.5px; margin-top:5px; }
+.chip{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid var(--border-2); color:var(--ink-2); }
+.chip--nin{ color:var(--nintendo); border-color: color-mix(in srgb, var(--nintendo) 45%, transparent); }
+.chip--ps{ color:var(--playstation); border-color: color-mix(in srgb, var(--playstation) 45%, transparent); }
+.chip--xb{ color:var(--xbox); border-color: color-mix(in srgb, var(--xbox) 45%, transparent); }
+.nn-row{ display:grid; grid-template-columns: 1fr 200px; align-items:center; gap:12px; padding:9px 0; border-bottom:1px solid var(--border); }
+.nn-row:last-child{ border-bottom:0; }
+.nn-name{ font-size:14px; font-weight:500; }
+.nn-name .rank{ font-family:"IBM Plex Mono",monospace; color:var(--muted); font-size:12px; margin-right:8px; }
+.nn-meta{ font-size:12px; color:var(--muted); margin-top:1px; }
+.nn-bar{ position:relative; height:22px; display:flex; align-items:center; gap:8px; }
+.nn-bar .track{ flex:1; height:8px; background:var(--surface-2); border-radius:4px; overflow:hidden; }
+.nn-bar .fill{ height:100%; background:var(--accent); border-radius:4px 0 0 4px; }
+.nn-bar .val{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-2); width:46px; text-align:right; font-variant-numeric:tabular-nums; }
+
+/* ============================ CHART GRID ============================ */
+.two{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 820px){ .two{ grid-template-columns:1fr; } }
+.chart-title{ font-family:"Chakra Petch",sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-2); margin-bottom:10px; }
+.scroll-x{ overflow-x:auto; }
+svg{ display:block; max-width:100%; }
+svg text{ font-family:"IBM Plex Sans", sans-serif; }
+.legend{ display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:12.5px; color:var(--ink-2); }
+.legend span{ display:inline-flex; align-items:center; gap:7px; }
+
+/* ============================ FRANCHISE CARDS ============================ */
+.fgrid{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+@media (max-width: 820px){ .fgrid{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px){ .fgrid{ grid-template-columns: 1fr; } }
+.fcard{ border:1px solid var(--border); border-radius:11px; padding:13px 14px; background:var(--surface-2); }
+.fpair{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; font-size:14px; font-weight:600; }
+.fpair .flink{ color:var(--accent); font-weight:700; }
+.fmeta{ display:flex; align-items:center; gap:7px; margin-top:9px; flex-wrap:wrap; }
+.fmeta .fval{ margin-left:auto; font-size:13px; color:var(--ink); font-weight:600; }
+
+/* ============================ TABLE ============================ */
+.tbl-tools{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+.search{ font-family:inherit; font-size:13px; padding:8px 12px; border-radius:9px; border:1px solid var(--border-2); background:var(--surface-2); color:var(--ink); min-width:220px; }
+.search:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+th,td{ text-align:left; padding:9px 12px; border-bottom:1px solid var(--border); }
+th{ font-family:"Chakra Petch",sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); cursor:pointer; user-select:none; white-space:nowrap; }
+th:hover{ color:var(--ink); }
+th[aria-sort] .arr{ color:var(--accent); }
+td.num{ font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; color:var(--ink-2); }
+td .pid{ font-family:"IBM Plex Mono",monospace; color:var(--muted); font-size:12px; }
+tbody tr:hover{ background: color-mix(in srgb, var(--accent) 7%, transparent); }
+
+/* ============================ TOOLTIP ============================ */
+#tip{
+  position:fixed; z-index:50; pointer-events:none; opacity:0; transition:opacity .1s;
+  background: var(--ink); color: var(--surface); font-size:12px; line-height:1.4;
+  padding:8px 10px; border-radius:8px; max-width:240px; box-shadow: var(--shadow);
+}
+#tip .t-name{ font-weight:600; font-family:"Chakra Petch",sans-serif; }
+#tip .t-row{ color: color-mix(in srgb, var(--surface) 75%, var(--ink)); }
+#tip .mono{ font-family:"IBM Plex Mono",monospace; }
+
+/* ============================ FOOTER ============================ */
+.note{ font-size:13px; color:var(--ink-2); }
+.note ul{ margin:8px 0 0; padding-left:18px; }
+.note li{ margin:4px 0; }
+.foot{ margin-top:40px; padding-top:20px; border-top:1px solid var(--border); color:var(--muted); font-size:12.5px; }
+.caveat{ background: color-mix(in srgb, var(--accent) 6%, transparent); border:1px solid var(--border); border-radius:10px; padding:12px 15px; font-size:12.5px; color:var(--ink-2); margin-top:14px; }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+</style>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="head">
+    <div>
+      <div class="eyebrow">Vector Knowledge Base &middot; Agentic RAG</div>
+      <h1>UdaPlay Retrieval Console</h1>
+      <p>How the UdaPlay research agent sees its world: <b>15 games</b> encoded as <b>1,536-dimension</b> OpenAI embeddings in ChromaDB, and the retrieval pipeline that turns a question into an answer. Every number here is read from the real stored vectors.</p>
+    </div>
+    <button class="themebtn" id="themeBtn" type="button" aria-label="Toggle color theme">&#9680; <span id="themeLbl">System</span></button>
+  </header>
+
+  <!-- KPIs -->
+  <section aria-label="Knowledge base at a glance">
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section>
+    <div class="sec-head">
+      <h2>The retrieval pipeline</h2>
+      <div class="sub">Every question flows through four stages. The judge decides whether the vector DB is enough &mdash; or whether to fall back to the web.</div>
+    </div>
+    <div class="card">
+      <div class="pipe-wrap"><div id="pipe"></div></div>
+      <div class="pipe-legend">
+        <span><i class="dotk" style="background:var(--accent)"></i> Tool call</span>
+        <span><i class="dotk" style="background:var(--good)"></i> Documents useful &rarr; answer locally</span>
+        <span><i class="dotk" style="background:var(--muted)"></i> Not useful &rarr; web fallback (Tavily)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VECTOR SEARCH DEMO -->
+  <section>
+    <div class="sec-head">
+      <h2>Vector search, live</h2>
+      <div class="sub">Pick any game to use its stored embedding as the query &mdash; exactly what <span class="mono">retrieve_game</span> does. The ranked results are the true nearest neighbours by cosine similarity.</div>
+    </div>
+    <div class="card">
+      <div class="demo">
+        <div class="picker" id="picker" role="listbox" aria-label="Choose a query game"></div>
+        <div class="result" id="result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMBEDDING MAP + HEATMAP -->
+  <section>
+    <div class="sec-head">
+      <h2>The embedding space</h2>
+      <div class="sub">Left: the 1,536-D vectors projected to 2-D (PCA). Right: cosine similarity between every pair. Sequels and franchises sit closest.</div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <div class="chart-title">PCA projection &middot; colored by console family</div>
+        <div class="scroll-x"><div id="scatter"></div></div>
+        <div class="legend" id="scatterLegend"></div>
+        <div class="caveat" id="pcaCaveat"></div>
+      </div>
+      <div class="card">
+        <div class="chart-title">Cosine similarity matrix (15 &times; 15)</div>
+        <div class="scroll-x"><div id="heatmap"></div></div>
+        <div class="legend" id="heatLegend"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRANCHISE LINKS -->
+  <section>
+    <div class="sec-head">
+      <h2>Strongest semantic links</h2>
+      <div class="sub">The embeddings pull sequels and same-franchise titles together across generations and consoles &mdash; this is the backbone of what <span class="mono">retrieve_game</span> returns.</div>
+    </div>
+    <div class="card">
+      <div class="fgrid" id="franchise"></div>
+    </div>
+  </section>
+
+  <!-- COMPOSITION -->
+  <section>
+    <div class="sec-head">
+      <h2>What's in the knowledge base</h2>
+      <div class="sub">Composition of the 15 indexed games &mdash; one title per platform, spanning 1990&ndash;2023.</div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <div class="chart-title">Games by genre</div>
+        <div id="genreChart"></div>
+      </div>
+      <div class="card">
+        <div class="chart-title">Games by publisher</div>
+        <div id="pubChart"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <div class="chart-title">Releases over time</div>
+      <div class="scroll-x"><div id="yearChart"></div></div>
+    </div>
+  </section>
+
+  <!-- TABLE -->
+  <section>
+    <div class="sec-head">
+      <h2>The full catalogue</h2>
+      <div class="sub">All 15 documents in the collection. Click a header to sort; type to filter.</div>
+    </div>
+    <div class="card">
+      <div class="tbl-tools">
+        <input class="search" id="search" type="search" placeholder="Filter by name, platform, genre&hellip;" aria-label="Filter games">
+        <span class="mono" id="tblCount" style="color:var(--muted);font-size:12px"></span>
+      </div>
+      <div class="scroll-x"><table id="tbl">
+        <thead><tr>
+          <th data-k="id">ID <span class="arr"></span></th>
+          <th data-k="Name">Name <span class="arr"></span></th>
+          <th data-k="Platform">Platform <span class="arr"></span></th>
+          <th data-k="Genre">Genre <span class="arr"></span></th>
+          <th data-k="Publisher">Publisher <span class="arr"></span></th>
+          <th data-k="YearOfRelease">Year <span class="arr"></span></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div class="note"><b>How this was built.</b>
+      <ul>
+        <li>The 15 game embeddings (1,536-D, OpenAI <span class="mono">text-embedding</span>) were read directly from the persistent ChromaDB collection <span class="mono">udaplay</span> &mdash; no API key needed to read stored vectors.</li>
+        <li>PCA (to 2-D) and the cosine-similarity matrix were computed offline with NumPy. PCA explains only <span id="pcaPct"></span> of variance combined &mdash; normal for 1,536-D text embeddings, so read the map as <i>relative</i> structure, not absolute axes.</li>
+        <li>The "vector search, live" panel uses each game's stored embedding as the query, so it shows genuine nearest neighbours over the existing 15 items. Embedding an arbitrary new text query would require a live OpenAI key.</li>
+      </ul>
+    </div>
+    <div style="margin-top:16px">UdaPlay &middot; Udacity Agentic AI capstone &middot; retrieval-process &amp; knowledge-base visualization</div>
+  </div>
+</div>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = {"count": 15, "embedding_dim": 1536, "pca_explained": [0.1639, 0.1261], "games": [{"id": "001", "Name": "Gran Turismo", "Platform": "PlayStation 1", "Genre": "Racing", "Publisher": "Sony Computer Entertainment", "YearOfRelease": 1997, "Description": "A realistic racing simulator featuring a wide array of cars and tracks, setting a new standard for the genre.", "x": -0.1494, "y": 0.3323}, {"id": "002", "Name": "Grand Theft Auto: San Andreas", "Platform": "PlayStation 2", "Genre": "Action-adventure", "Publisher": "Rockstar Games", "YearOfRelease": 2004, "Description": "An expansive open-world game set in the fictional state of San Andreas, following the story of Carl 'CJ' Johnson.", "x": -0.1289, "y": 0.1322}, {"id": "003", "Name": "Gran Turismo 5", "Platform": "PlayStation 3", "Genre": "Racing", "Publisher": "Sony Computer Entertainment", "YearOfRelease": 2010, "Description": "A comprehensive racing simulator featuring a vast selection of vehicles and tracks, with realistic driving physics.", "x": -0.2051, "y": 0.2919}, {"id": "004", "Name": "Marvel's Spider-Man", "Platform": "PlayStation 4", "Genre": "Action-adventure", "Publisher": "Sony Interactive Entertainment", "YearOfRelease": 2018, "Description": "An open-world superhero game that lets players swing through New York City as Spider-Man, battling iconic villains.", "x": -0.1604, "y": -0.1382}, {"id": "005", "Name": "Marvel's Spider-Man 2", "Platform": "PlayStation 5", "Genre": "Action-adventure", "Publisher": "Sony Interactive Entertainment", "YearOfRelease": 2023, "Description": "The sequel to the acclaimed Spider-Man game, featuring both Peter Parker and Miles Morales as playable characters.", "x": -0.1662, "y": -0.1533}, {"id": "006", "Name": "Pok\u00e9mon Gold and Silver", "Platform": "Game Boy Color", "Genre": "Role-playing", "Publisher": "Nintendo", "YearOfRelease": 1999, "Description": "Second-generation Pok\u00e9mon games introducing new regions, Pok\u00e9mon, and gameplay mechanics.", "x": 0.3027, "y": 0.0113}, {"id": "007", "Name": "Pok\u00e9mon Ruby and Sapphire", "Platform": "Game Boy Advance", "Genre": "Role-playing", "Publisher": "Nintendo", "YearOfRelease": 2002, "Description": "Third-generation Pok\u00e9mon games set in the Hoenn region, featuring new Pok\u00e9mon and double battles.", "x": 0.3196, "y": 0.026}, {"id": "008", "Name": "Super Mario World", "Platform": "Super Nintendo Entertainment System (SNES)", "Genre": "Platformer", "Publisher": "Nintendo", "YearOfRelease": 1990, "Description": "A classic platformer where Mario embarks on a quest to save Princess Toadstool and Dinosaur Land from Bowser.", "x": 0.183, "y": -0.0273}, {"id": "009", "Name": "Super Mario 64", "Platform": "Nintendo 64", "Genre": "Platformer", "Publisher": "Nintendo", "YearOfRelease": 1996, "Description": "A groundbreaking 3D platformer that set new standards for the genre, featuring Mario's quest to rescue Princess Peach.", "x": 0.1815, "y": 0.0177}, {"id": "010", "Name": "Super Smash Bros. Melee", "Platform": "GameCube", "Genre": "Fighting", "Publisher": "Nintendo", "YearOfRelease": 2001, "Description": "A crossover fighting game featuring characters from various Nintendo franchises battling it out in dynamic arenas.", "x": 0.1015, "y": -0.0263}, {"id": "011", "Name": "Wii Sports", "Platform": "Wii", "Genre": "Sports", "Publisher": "Nintendo", "YearOfRelease": 2006, "Description": "A collection of sports games that utilize the Wii's motion controls, bundled with the console to showcase its capabilities.", "x": 0.0568, "y": 0.0188}, {"id": "012", "Name": "Mario Kart 8 Deluxe", "Platform": "Nintendo Switch", "Genre": "Racing", "Publisher": "Nintendo", "YearOfRelease": 2017, "Description": "An enhanced version of Mario Kart 8, featuring new characters, tracks, and improved gameplay mechanics.", "x": 0.0303, "y": 0.0387}, {"id": "013", "Name": "Kinect Adventures!", "Platform": "Xbox 360", "Genre": "Party", "Publisher": "Microsoft Game Studios", "YearOfRelease": 2010, "Description": "A collection of mini-games designed to showcase the capabilities of the Kinect motion sensor.", "x": -0.0511, "y": -0.1272}, {"id": "014", "Name": "Minecraft", "Platform": "Xbox One", "Genre": "Sandbox, Survival", "Publisher": "Mojang Studios", "YearOfRelease": 2014, "Description": "A sandbox game that allows players to build and explore infinite worlds, fostering creativity and adventure.", "x": -0.1366, "y": -0.1837}, {"id": "015", "Name": "Halo Infinite", "Platform": "Xbox Series X|S", "Genre": "First-person shooter", "Publisher": "Xbox Game Studios", "YearOfRelease": 2021, "Description": "The latest installment in the Halo franchise, featuring Master Chief's return in a new open-world setting.", "x": -0.1776, "y": -0.2129}], "by_platform": {"Game Boy Advance": 1, "Game Boy Color": 1, "GameCube": 1, "Nintendo 64": 1, "Nintendo Switch": 1, "PlayStation 1": 1, "PlayStation 2": 1, "PlayStation 3": 1, "PlayStation 4": 1, "PlayStation 5": 1, "Super Nintendo Entertainment System (SNES)": 1, "Wii": 1, "Xbox 360": 1, "Xbox One": 1, "Xbox Series X|S": 1}, "by_genre": {"Action-adventure": 3, "Racing": 3, "Platformer": 2, "Role-playing": 2, "Fighting": 1, "First-person shooter": 1, "Party": 1, "Sandbox, Survival": 1, "Sports": 1}, "by_publisher": {"Nintendo": 7, "Sony Computer Entertainment": 2, "Sony Interactive Entertainment": 2, "Microsoft Game Studios": 1, "Mojang Studios": 1, "Rockstar Games": 1, "Xbox Game Studios": 1}, "by_year": {"2010": 2, "1990": 1, "1996": 1, "1997": 1, "1999": 1, "2001": 1, "2002": 1, "2004": 1, "2006": 1, "2014": 1, "2017": 1, "2018": 1, "2021": 1, "2023": 1}, "similarity_matrix": [[1.0, 0.8446, 0.9403, 0.7977, 0.7844, 0.7858, 0.7717, 0.7886, 0.8147, 0.7925, 0.7969, 0.8161, 0.7675, 0.7881, 0.7815], [0.8446, 1.0, 0.8388, 0.8241, 0.7823, 0.7791, 0.7687, 0.7992, 0.8018, 0.783, 0.7687, 0.7692, 0.7663, 0.8101, 0.7833], [0.9403, 0.8388, 1.0, 0.817, 0.8039, 0.7691, 0.7634, 0.7716, 0.7952, 0.7904, 0.8115, 0.8326, 0.7945, 0.7953, 0.7882], [0.7977, 0.8241, 0.817, 1.0, 0.896, 0.775, 0.7628, 0.8107, 0.8132, 0.8094, 0.784, 0.8104, 0.7776, 0.8293, 0.8072], [0.7844, 0.7823, 0.8039, 0.896, 1.0, 0.78, 0.7528, 0.7724, 0.7775, 0.7862, 0.7676, 0.7847, 0.7628, 0.781, 0.8085], [0.7858, 0.7791, 0.7691, 0.775, 0.78, 1.0, 0.9258, 0.8194, 0.8312, 0.8056, 0.7905, 0.7972, 0.7681, 0.7701, 0.7627], [0.7717, 0.7687, 0.7634, 0.7628, 0.7528, 0.9258, 1.0, 0.799, 0.8186, 0.7875, 0.7781, 0.787, 0.7638, 0.7502, 0.7549], [0.7886, 0.7992, 0.7716, 0.8107, 0.7724, 0.8194, 0.799, 1.0, 0.9129, 0.833, 0.8047, 0.8182, 0.7694, 0.8039, 0.76], [0.8147, 0.8018, 0.7952, 0.8132, 0.7775, 0.8312, 0.8186, 0.9129, 1.0, 0.8453, 0.8186, 0.845, 0.78, 0.8088, 0.7697], [0.7925, 0.783, 0.7904, 0.8094, 0.7862, 0.8056, 0.7875, 0.833, 0.8453, 1.0, 0.828, 0.8268, 0.7789, 0.7878, 0.7758], [0.7969, 0.7687, 0.8115, 0.784, 0.7676, 0.7905, 0.7781, 0.8047, 0.8186, 0.828, 1.0, 0.8193, 0.8487, 0.7807, 0.7562], [0.8161, 0.7692, 0.8326, 0.8104, 0.7847, 0.7972, 0.787, 0.8182, 0.845, 0.8268, 0.8193, 1.0, 0.8019, 0.7948, 0.7876], [0.7675, 0.7663, 0.7945, 0.7776, 0.7628, 0.7681, 0.7638, 0.7694, 0.78, 0.7789, 0.8487, 0.8019, 1.0, 0.8219, 0.7989], [0.7881, 0.8101, 0.7953, 0.8293, 0.781, 0.7701, 0.7502, 0.8039, 0.8088, 0.7878, 0.7807, 0.7948, 0.8219, 1.0, 0.8477], [0.7815, 0.7833, 0.7882, 0.8072, 0.8085, 0.7627, 0.7549, 0.76, 0.7697, 0.7758, 0.7562, 0.7876, 0.7989, 0.8477, 1.0]], "labels": ["Gran Turismo", "Grand Theft Auto: San Andreas", "Gran Turismo 5", "Marvel's Spider-Man", "Marvel's Spider-Man 2", "Pok\u00e9mon Gold and Silver", "Pok\u00e9mon Ruby and Sapphire", "Super Mario World", "Super Mario 64", "Super Smash Bros. Melee", "Wii Sports", "Mario Kart 8 Deluxe", "Kinect Adventures!", "Minecraft", "Halo Infinite"]};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const NS = "http://www.w3.org/2000/svg";
+const games = DATA.games;
+const byId = Object.fromEntries(games.map(g => [g.id, g]));
+const sim = DATA.similarity_matrix;
+const idIndex = Object.fromEntries(games.map((g,i)=>[g.id,i]));
+
+function familyOf(p){
+  if(/xbox/i.test(p)) return "xbox";
+  if(/playstation/i.test(p)) return "playstation";
+  return "nintendo"; // Game Boy, SNES, N64, GameCube, Wii, Switch
+}
+const FAM_LABEL = { nintendo:"Nintendo", playstation:"PlayStation", xbox:"Xbox" };
+const FAM_VAR = { nintendo:"var(--nintendo)", playstation:"var(--playstation)", xbox:"var(--xbox)" };
+const FAM_CHIP = { nintendo:"chip--nin", playstation:"chip--ps", xbox:"chip--xb" };
+
+/* ---------- tooltip ---------- */
+const tip = $("#tip");
+function showTip(html, e){
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if(x + w > innerWidth) x = e.clientX - w - pad;
+  if(y + h > innerHeight) y = e.clientY - h - pad;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip(){ tip.style.opacity = 0; }
+
+/* ---------- KPIs ---------- */
+function renderKPIs(){
+  const years = games.map(g=>g.YearOfRelease);
+  let best={s:-1,a:null,b:null};
+  for(let i=0;i<games.length;i++)for(let j=i+1;j<games.length;j++) if(sim[i][j]>best.s) best={s:sim[i][j]};
+  const tiles = [
+    ["Games indexed", DATA.count],
+    ["Embedding dims", DATA.embedding_dim.toLocaleString()],
+    ["Platforms &middot; 1 game each", Object.keys(DATA.by_platform).length],
+    ["Genres &middot; publishers", `${Object.keys(DATA.by_genre).length}<small> &middot; ${Object.keys(DATA.by_publisher).length}</small>`],
+    ["Release span", `${Math.min(...years)}<small>&ndash;${Math.max(...years)}</small>`],
+    ["Closest pair &middot; cosine", best.s.toFixed(2)],
+  ];
+  $("#kpis").innerHTML = tiles.map(([l,v])=>
+    `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+}
+
+/* ---------- pipeline diagram ---------- */
+function renderPipe(){
+  const W=900,H=210;
+  const card="var(--surface-2)", acc="var(--accent)", good="var(--good)", mut="var(--muted)";
+  const y1=50, cy=y1+26;                     // row-1 vertical centre
+  const dcx=588, dhw=42, dhh=32, wy=148;     // diamond centre + web-row top
+  const box=(x,y,w,title,sub,stroke)=>`
+    <rect x="${x}" y="${y}" width="${w}" height="52" rx="11" fill="${card}" stroke="${stroke}" stroke-width="1.5"/>
+    <text x="${x+w/2}" y="${y+22}" text-anchor="middle" font-size="13.5" font-weight="600" font-family="Chakra Petch" fill="var(--ink)">${title}</text>
+    <text x="${x+w/2}" y="${y+39}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="IBM Plex Mono">${sub}</text>`;
+  const line=(x1,ya,x2,yb,color,mk)=>`<line x1="${x1}" y1="${ya}" x2="${x2}" y2="${yb}" stroke="${color}" stroke-width="2" marker-end="url(#${mk})"/>`;
+  const svg=`
+  <svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Retrieval pipeline diagram: user question, retrieve_game, evaluate_retrieval, useful decision to generate or web fallback">
+    <defs>
+      <marker id="ah"  viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--axis)"/></marker>
+      <marker id="ahg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--good)"/></marker>
+      <marker id="ahm" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+    </defs>
+    ${box(12, y1, 128, "User question", "query", "var(--border-2)")}
+    ${line(140, cy, 166, cy, "var(--axis)", "ah")}
+    ${box(166, y1, 158, "retrieve_game", "vector search &middot; k=5", acc)}
+    ${line(324, cy, 350, cy, "var(--axis)", "ah")}
+    ${box(350, y1, 172, "evaluate_retrieval", "LLM-as-judge", acc)}
+    ${line(522, cy, dcx-dhw, cy, "var(--axis)", "ah")}
+    <polygon points="${dcx-dhw},${cy} ${dcx},${cy-dhh} ${dcx+dhw},${cy} ${dcx},${cy+dhh}" fill="${card}" stroke="var(--border-2)" stroke-width="1.5"/>
+    <text x="${dcx}" y="${cy-2}" text-anchor="middle" font-size="12.5" font-weight="600" font-family="Chakra Petch" fill="var(--ink)">useful?</text>
+    <text x="${dcx}" y="${cy+13}" text-anchor="middle" font-size="10" font-family="IBM Plex Mono" fill="var(--muted)">judge</text>
+    ${line(dcx+dhw, cy, 706, cy, good, "ahg")}
+    <text x="${(dcx+dhw+706)/2}" y="${cy-8}" text-anchor="middle" font-size="11" font-weight="600" fill="var(--good-ink)" font-family="IBM Plex Mono">yes</text>
+    ${box(706, y1, 150, "generate", "final answer", good)}
+    ${line(dcx, cy+dhh, dcx, wy, mut, "ahm")}
+    <text x="${dcx+12}" y="${cy+dhh+18}" font-size="11" font-weight="600" fill="var(--muted)" font-family="IBM Plex Mono">no</text>
+    ${box(474, wy, 224, "game_web_search", "Tavily web fallback", mut)}
+    <polyline points="698,${wy+26} 770,${wy+26} 770,${y1+54}" fill="none" stroke="${mut}" stroke-width="2" marker-end="url(#ahm)"/>
+  </svg>`;
+  $("#pipe").innerHTML = svg;
+}
+
+/* ---------- vector search demo ---------- */
+let selectedId = "006"; // Pokemon Gold and Silver &mdash; a clean franchise example
+function topNeighbours(id, k=5){
+  const i = idIndex[id];
+  return games.map((g,j)=>({g, s: sim[i][j]}))
+    .filter(o=>o.g.id!==id)
+    .sort((a,b)=>b.s-a.s).slice(0,k);
+}
+function renderPicker(){
+  $("#picker").innerHTML = games.map(g=>{
+    const fam=familyOf(g.Platform);
+    return `<button role="option" data-id="${g.id}" aria-selected="${g.id===selectedId}">
+      <span class="pid">${g.id}</span>
+      <span style="flex:1">${g.Name}</span>
+      <i class="dotk" style="background:${FAM_VAR[fam]}"></i>
+    </button>`;
+  }).join("");
+}
+function renderResult(){
+  const g = byId[selectedId], fam = familyOf(g.Platform);
+  const nns = topNeighbours(selectedId, 5);
+  const max = nns[0].s;
+  const rows = nns.map((o,idx)=>{
+    const f=familyOf(o.g.Platform);
+    const pct = Math.max(6, (o.s/max)*100);
+    return `<div class="nn-row">
+      <div>
+        <div class="nn-name"><span class="rank mono">#${idx+1}</span>${o.g.Name}</div>
+        <div class="nn-meta">${o.g.Platform} &middot; ${o.g.Genre}</div>
+      </div>
+      <div class="nn-bar">
+        <span class="chip ${FAM_CHIP[f]}">${FAM_LABEL[f]}</span>
+        <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+        <span class="val">${o.s.toFixed(3)}</span>
+      </div>
+    </div>`;
+  }).join("");
+  $("#result").innerHTML = `
+    <div class="query-card">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline">
+        <h3>${g.Name}</h3>
+        <span class="chip ${FAM_CHIP[fam]}">${g.Platform}</span>
+      </div>
+      <div class="desc">${g.Description}</div>
+    </div>
+    <div class="chart-title">Nearest neighbours &middot; cosine similarity</div>
+    ${rows}`;
+}
+function selectGame(id){
+  selectedId = id;
+  renderPicker(); renderResult(); paintScatterSelection();
+  document.querySelector(`.picker button[data-id="${id}"]`)?.scrollIntoView({block:"nearest"});
+}
+
+/* ---------- scatter (PCA) ---------- */
+let scatterEls = {};
+function renderScatter(){
+  const W=440,H=380,m={t:16,r:16,b:16,l:16};
+  const xs=games.map(g=>g.x), ys=games.map(g=>g.y);
+  const xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);
+  const pad=0.06;
+  const sx=v=>m.l+((v-xmin)/(xmax-xmin||1))*(W-m.l-m.r)*(1-pad)+ (W-m.l-m.r)*pad/2;
+  const sy=v=>H-m.b-((v-ymin)/(ymax-ymin||1))*(H-m.t-m.b)*(1-pad)- (H-m.t-m.b)*pad/2;
+  let dots="";
+  games.forEach(g=>{
+    const fam=familyOf(g.Platform);
+    dots+=`<circle class="pt" data-id="${g.id}" cx="${sx(g.x).toFixed(1)}" cy="${sy(g.y).toFixed(1)}" r="7"
+      fill="${FAM_VAR[fam]}" stroke="var(--surface)" stroke-width="2" style="cursor:pointer"/>`;
+  });
+  $("#scatter").innerHTML=`
+    <svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="PCA projection of game embeddings">
+      <rect x="0" y="0" width="${W}" height="${H}" fill="none"/>
+      <line x1="${m.l}" y1="${H/2}" x2="${W-m.r}" y2="${H/2}" stroke="var(--grid)" stroke-width="1"/>
+      <line x1="${W/2}" y1="${m.t}" x2="${W/2}" y2="${H-m.b}" stroke="var(--grid)" stroke-width="1"/>
+      <g id="nnlines"></g>
+      ${dots}
+    </svg>`;
+  const leg=Object.entries(FAM_LABEL).map(([k,v])=>
+    `<span><i class="dotk" style="background:${FAM_VAR[k]}"></i>${v}</span>`).join("");
+  $("#scatterLegend").innerHTML=leg;
+  scatterEls={sx,sy};
+  paintScatterSelection();
+}
+function paintScatterSelection(){
+  const g=byId[selectedId];
+  const nns=topNeighbours(selectedId,4).map(o=>o.g.id);
+  document.querySelectorAll("#scatter .pt").forEach(c=>{
+    const id=c.getAttribute("data-id");
+    if(id===selectedId){ c.setAttribute("r","9"); c.setAttribute("stroke","var(--ink)"); }
+    else if(nns.includes(id)){ c.setAttribute("r","7"); c.setAttribute("opacity","1"); c.setAttribute("stroke","var(--surface)"); }
+    else { c.setAttribute("r","6"); c.setAttribute("opacity","0.35"); c.setAttribute("stroke","var(--surface)"); }
+  });
+  const {sx,sy}=scatterEls;
+  const g0=byId[selectedId];
+  $("#nnlines").innerHTML = topNeighbours(selectedId,4).map(o=>
+    `<line x1="${sx(g0.x)}" y1="${sy(g0.y)}" x2="${sx(o.g.x)}" y2="${sy(o.g.y)}"
+       stroke="var(--accent)" stroke-width="1.3" opacity="0.4"/>`).join("");
+}
+
+/* ---------- heatmap ---------- */
+function renderHeatmap(){
+  const n=games.length, cell=22, lab=94, W=lab+n*cell+8, H=lab+n*cell+8;
+  const short=games.map(g=> g.Name.length>16? g.Name.slice(0,15)+"&hellip;" : g.Name);
+  let vals=[]; for(let i=0;i<n;i++)for(let j=0;j<n;j++) if(i!==j) vals.push(sim[i][j]);
+  const vmin=Math.min(...vals), vmax=Math.max(...vals);
+  let cells="";
+  for(let i=0;i<n;i++){
+    for(let j=0;j<n;j++){
+      const v=sim[i][j];
+      const a = i===j ? 1 : 0.10 + 0.9*((v-vmin)/(vmax-vmin));
+      const x=lab+j*cell, y=lab+i*cell;
+      const diag = i===j;
+      cells+=`<rect class="hc" data-i="${i}" data-j="${j}" x="${x+1}" y="${y+1}" width="${cell-2}" height="${cell-2}" rx="3"
+        style="fill:${diag?'var(--surface-2)':`rgba(var(--accent-rgb),${a.toFixed(3)})`}" ${diag?'':'cursor:pointer'}/>`;
+    }
+  }
+  let labels="";
+  for(let i=0;i<n;i++){
+    labels+=`<text x="${lab-6}" y="${lab+i*cell+cell/2+3.5}" text-anchor="end" font-size="9.5" fill="var(--muted)">${short[i]}</text>`;
+    labels+=`<text x="${lab+i*cell+cell/2}" y="${lab-6}" text-anchor="start" font-size="9.5" fill="var(--muted)" transform="rotate(-52 ${lab+i*cell+cell/2} ${lab-6})">${short[i]}</text>`;
+  }
+  $("#heatmap").innerHTML=`
+    <svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Cosine similarity heatmap">
+      ${cells}${labels}
+    </svg>`;
+  $("#heatLegend").innerHTML=`
+    <span style="color:var(--muted)">Lower</span>
+    <span style="display:inline-block;width:120px;height:10px;border-radius:5px;background:linear-gradient(90deg, rgba(var(--accent-rgb),0.10), rgba(var(--accent-rgb),1))"></span>
+    <span style="color:var(--muted)">Higher &middot; cosine ${vmin.toFixed(2)}&ndash;${vmax.toFixed(2)}</span>`;
+}
+
+/* ---------- bar charts ---------- */
+function barChart(el, entries, {label}){
+  const rowH=30, W=440, labW=Math.min(150, Math.max(...entries.map(e=>e[0].length))*6.6+12), barMax=W-labW-46;
+  const max=Math.max(...entries.map(e=>e[1]));
+  const H=entries.length*rowH+8;
+  let rows="";
+  entries.forEach((e,i)=>{
+    const [name,val]=e, y=i*rowH+6, w=Math.max(3,(val/max)*barMax);
+    rows+=`
+      <text x="${labW-8}" y="${y+15}" text-anchor="end" font-size="12" fill="var(--ink-2)">${name}</text>
+      <rect class="bar" data-name="${name}" data-val="${val}" x="${labW}" y="${y+4}" width="${w.toFixed(1)}" height="16" rx="4"
+        style="fill:var(--accent);cursor:pointer"/>
+      <rect x="${labW}" y="${y+4}" width="${barMax}" height="16" rx="4" fill="var(--grid)" opacity="0" pointer-events="none"/>
+      <text x="${labW+w+7}" y="${y+16}" font-size="12" font-family="IBM Plex Mono" fill="var(--ink-2)">${val}</text>`;
+  });
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="${label}">${rows}</svg>`;
+}
+function renderComposition(){
+  barChart($("#genreChart"), Object.entries(DATA.by_genre), {label:"Games by genre"});
+  barChart($("#pubChart"), Object.entries(DATA.by_publisher), {label:"Games by publisher"});
+  renderYear();
+}
+function renderYear(){
+  const years=games.map(g=>g.YearOfRelease);
+  const y0=Math.min(...years), y1=Math.max(...years);
+  const counts={}; for(let y=y0;y<=y1;y++) counts[y]=0; games.forEach(g=>counts[g.YearOfRelease]++);
+  const arr=Object.entries(counts).map(([y,c])=>[+y,c]);
+  const W=Math.max(760, arr.length*22+40), H=150, m={t:12,b:34,l:16,r:16};
+  const max=Math.max(...arr.map(a=>a[1]));
+  const bw=Math.min(18,(W-m.l-m.r)/arr.length-4);
+  const step=(W-m.l-m.r)/arr.length;
+  let bars="", ticks="";
+  arr.forEach((a,i)=>{
+    const [yr,c]=a, x=m.l+i*step+step/2, h=c===0?0:(c/max)*(H-m.t-m.b);
+    if(c>0) bars+=`<rect class="bar" data-name="${yr}" data-val="${c}" x="${(x-bw/2).toFixed(1)}" y="${(H-m.b-h).toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" rx="3" style="fill:var(--accent);cursor:pointer"/>`;
+    if(yr%5===0 || yr===y0 || yr===y1)
+      ticks+=`<text x="${x}" y="${H-m.b+16}" text-anchor="middle" font-size="10.5" font-family="IBM Plex Mono" fill="var(--muted)">${yr}</text>`;
+  });
+  $("#yearChart").innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Releases per year">
+    <line x1="${m.l}" y1="${H-m.b}" x2="${W-m.r}" y2="${H-m.b}" stroke="var(--axis)" stroke-width="1"/>
+    ${bars}${ticks}</svg>`;
+}
+
+/* ---------- franchise links ---------- */
+function renderFranchise(){
+  const pairs=[];
+  for(let i=0;i<games.length;i++) for(let j=i+1;j<games.length;j++) pairs.push({a:games[i],b:games[j],s:sim[i][j]});
+  pairs.sort((x,y)=>y.s-x.s);
+  $("#franchise").innerHTML = pairs.slice(0,6).map(p=>{
+    const fa=familyOf(p.a.Platform), fb=familyOf(p.b.Platform);
+    return `<div class="fcard">
+      <div class="fpair"><span>${p.a.Name}</span><span class="flink">&harr;</span><span>${p.b.Name}</span></div>
+      <div class="fmeta">
+        <span class="chip ${FAM_CHIP[fa]}">${p.a.Platform}</span>
+        <span class="chip ${FAM_CHIP[fb]}">${p.b.Platform}</span>
+        <span class="fval mono">${p.s.toFixed(3)}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ---------- table ---------- */
+let sortK="id", sortDir=1, filter="";
+function renderTable(){
+  let rows=games.filter(g=>{
+    if(!filter) return true;
+    const q=filter.toLowerCase();
+    return [g.Name,g.Platform,g.Genre,g.Publisher,String(g.YearOfRelease),g.id].some(v=>v.toLowerCase().includes(q));
+  });
+  rows.sort((a,b)=>{
+    let x=a[sortK], y=b[sortK];
+    if(sortK==="YearOfRelease"){ x=+x; y=+y; }
+    return x<y? -1*sortDir : x>y? 1*sortDir : 0;
+  });
+  $("#tbody").innerHTML = rows.map(g=>{
+    const f=familyOf(g.Platform);
+    return `<tr data-id="${g.id}" style="cursor:pointer">
+      <td class="num">${g.id}</td>
+      <td>${g.Name}</td>
+      <td><i class="dotk" style="background:${FAM_VAR[f]};margin-right:7px;vertical-align:-1px"></i>${g.Platform}</td>
+      <td>${g.Genre}</td>
+      <td>${g.Publisher}</td>
+      <td class="num">${g.YearOfRelease}</td>
+    </tr>`;
+  }).join("");
+  $("#tblCount").textContent = `${rows.length} / ${games.length} games`;
+  document.querySelectorAll("#tbl th").forEach(th=>{
+    const k=th.getAttribute("data-k");
+    th.setAttribute("aria-sort", k===sortK ? (sortDir===1?"ascending":"descending") : "none");
+    th.querySelector(".arr").textContent = k===sortK ? (sortDir===1?"\u25B2":"\u25BC") : "";
+  });
+}
+
+/* ---------- static caveat text ---------- */
+function renderCaveats(){
+  const pct = ((DATA.pca_explained[0]+DATA.pca_explained[1])*100).toFixed(0)+"%";
+  $("#pcaPct").textContent = pct;
+  $("#pcaCaveat").innerHTML = `PC1 + PC2 capture <b>${pct}</b> of variance &mdash; the map shows relative clustering, not exact distances.`;
+}
+
+/* ---------- events ---------- */
+function wireEvents(){
+  // picker
+  $("#picker").addEventListener("click", e=>{
+    const b=e.target.closest("button[data-id]"); if(b) selectGame(b.getAttribute("data-id"));
+  });
+  // scatter hover + click
+  $("#scatter").addEventListener("mouseover", e=>{
+    const c=e.target.closest(".pt"); if(!c) return;
+    const g=byId[c.getAttribute("data-id")], f=familyOf(g.Platform);
+    showTip(`<div class="t-name">${g.Name}</div><div class="t-row">${g.Platform} &middot; ${g.Genre}</div><div class="t-row mono">${FAM_LABEL[f]} &middot; ${g.YearOfRelease}</div>`, e);
+  });
+  $("#scatter").addEventListener("mousemove", e=>{ if(tip.style.opacity==="1"){ const c=e.target.closest(".pt"); if(c) showTip(tip.innerHTML,e);} });
+  $("#scatter").addEventListener("mouseout", hideTip);
+  $("#scatter").addEventListener("click", e=>{ const c=e.target.closest(".pt"); if(c) selectGame(c.getAttribute("data-id")); });
+  // heatmap hover
+  $("#heatmap").addEventListener("mouseover", e=>{
+    const r=e.target.closest(".hc"); if(!r) return;
+    const i=+r.getAttribute("data-i"), j=+r.getAttribute("data-j"); if(i===j) return;
+    showTip(`<div class="t-name">${games[i].Name}</div><div class="t-row">&harr; ${games[j].Name}</div><div class="t-row mono">cosine ${sim[i][j].toFixed(3)}</div>`, e);
+  });
+  $("#heatmap").addEventListener("mousemove", e=>{ const r=e.target.closest(".hc"); if(r && r.getAttribute("data-i")!==r.getAttribute("data-j")) showTip(tip.innerHTML,e); });
+  $("#heatmap").addEventListener("mouseout", hideTip);
+  // bar hover
+  document.querySelectorAll("#genreChart,#pubChart,#yearChart").forEach(el=>{
+    el.addEventListener("mouseover", e=>{ const b=e.target.closest(".bar"); if(b) showTip(`<div class="t-name">${b.getAttribute("data-name")}</div><div class="t-row mono">${b.getAttribute("data-val")} game(s)</div>`, e); });
+    el.addEventListener("mousemove", e=>{ const b=e.target.closest(".bar"); if(b) showTip(tip.innerHTML,e); });
+    el.addEventListener("mouseout", hideTip);
+  });
+  // table
+  document.querySelectorAll("#tbl th").forEach(th=>th.addEventListener("click",()=>{
+    const k=th.getAttribute("data-k");
+    if(k===sortK) sortDir*=-1; else { sortK=k; sortDir=1; }
+    renderTable();
+  }));
+  $("#tbody").addEventListener("click", e=>{ const tr=e.target.closest("tr[data-id]"); if(tr){ selectGame(tr.getAttribute("data-id")); document.querySelector('.demo').scrollIntoView({behavior:'smooth',block:'center'});} });
+  $("#search").addEventListener("input", e=>{ filter=e.target.value; renderTable(); });
+  // theme toggle: system -> light -> dark -> system
+  const order=["system","light","dark"], lbl={system:"System",light:"Light",dark:"Dark"};
+  let ti=0;
+  $("#themeBtn").addEventListener("click", ()=>{
+    ti=(ti+1)%3; const t=order[ti];
+    if(t==="system") delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme=t;
+    $("#themeLbl").textContent=lbl[t];
+  });
+}
+
+/* ---------- init ---------- */
+renderKPIs(); renderPipe(); renderPicker(); renderResult();
+renderScatter(); renderHeatmap(); renderFranchise(); renderComposition(); renderTable(); renderCaveats(); wireEvents();
+</script>
